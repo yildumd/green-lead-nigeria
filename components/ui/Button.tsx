@@ -1,11 +1,12 @@
 import { forwardRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, HTMLMotionProps } from 'framer-motion'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   variant?: 'primary' | 'secondary' | 'outline'
   size?: 'sm' | 'md' | 'lg'
   children: React.ReactNode
-}
+  className?: string
+} & Omit<HTMLMotionProps<"button">, "ref" | "children" | "className">
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'primary', size = 'md', children, className = '', ...props }, ref) => {

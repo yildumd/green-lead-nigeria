@@ -263,15 +263,15 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
             transition={{ type: 'spring', damping: 25 }}
-            className={`fixed z-50 bg-white shadow-2xl rounded-2xl transition-all duration-300 ${
-              isMinimized ? 'w-72 sm:w-80' : 'w-[calc(100vw-2rem)] sm:w-[480px]'
-            } max-w-full ${
-              // Mobile: bottom, Desktop: bottom-24 (above the button)
-              'bottom-16 right-4 sm:bottom-24 sm:right-6'
-            }`}
+            className="fixed z-50 bg-white shadow-2xl rounded-2xl overflow-hidden w-[90vw] sm:w-[450px] max-w-[450px]"
+            style={{
+              bottom: '80px',
+              right: '16px',
+              maxHeight: '80vh',
+            }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between rounded-t-2xl bg-primary p-3 sm:p-4">
+            <div className="flex items-center justify-between bg-primary p-3 sm:p-4">
               <div>
                 <h3 className="font-semibold text-white text-sm sm:text-base">
                   Green Lead AI Assistant
@@ -298,7 +298,7 @@ export default function Chatbot() {
             {!isMinimized && (
               <>
                 {/* Messages */}
-                <div className="h-80 sm:h-96 overflow-y-auto p-3 sm:p-4 bg-gray-50">
+                <div className="h-[60vh] sm:h-[500px] overflow-y-auto p-3 sm:p-4 bg-gray-50">
                   {messages.map((msg, idx) => (
                     <div key={idx} className={`mb-4 flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[85%] ${msg.isUser ? 'text-right' : 'text-left'}`}>
@@ -345,7 +345,7 @@ export default function Chatbot() {
                 </div>
 
                 {/* Input */}
-                <div className="border-t p-3 sm:p-4 bg-white rounded-b-2xl">
+                <div className="border-t p-3 sm:p-4 bg-white">
                   <div className="flex gap-2">
                     <input
                       ref={inputRef}

@@ -84,20 +84,20 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed inset-0 top-0 z-0 bg-white pt-24 lg:hidden"
+              className="fixed inset-0 top-0 z-0 bg-white pt-24 shadow-xl lg:hidden"
             >
-              <div className="container-custom flex flex-col gap-6">
+              <div className="container-custom flex flex-col gap-4">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-lg font-medium text-gray-900 transition-colors hover:text-primary"
+                    className="border-b border-gray-100 py-3 text-lg font-medium text-gray-900 transition-colors hover:text-primary"
                   >
                     {item.name}
                   </Link>
                 ))}
-                <Button variant="primary" className="mt-4 w-full">
+                <Button variant="primary" className="mt-2 w-full">
                   Get Started
                 </Button>
               </div>

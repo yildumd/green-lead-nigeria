@@ -28,11 +28,23 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileMenuOpen])
+
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg'
+        isScrolled || isMobileMenuOpen
+          ? 'bg-white shadow-lg'
           : 'bg-transparent'
       }`}
     >
@@ -85,8 +97,9 @@ export default function Header() {
               exit={{ opacity: 0, x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
               className="fixed inset-0 top-0 z-0 bg-white pt-24 shadow-xl lg:hidden"
+              style={{ height: '100vh', overflowY: 'auto' }}
             >
-              <div className="container-custom flex flex-col gap-4">
+              <div className="container-custom flex flex-col gap-4 pb-8">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}

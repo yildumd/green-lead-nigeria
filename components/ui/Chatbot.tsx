@@ -19,7 +19,6 @@ interface UserInfo {
 
 // Comprehensive knowledge base
 const knowledgeBase: Record<string, { response: string, suggestions?: string[] }> = {
-  // Greetings
   'hello': {
     response: "Hello! I'm your Green Lead AI assistant. How can I help you with carbon solutions today?",
     suggestions: ["Tell me about carbon credits", "What services do you offer?", "How do I get started?"]
@@ -28,8 +27,6 @@ const knowledgeBase: Record<string, { response: string, suggestions?: string[] }
     response: "Hi there! Welcome to Green Lead Nigeria. I'm here to help with all your carbon solution questions!",
     suggestions: ["Tell me about carbon credits", "What services do you offer?", "How do I get started?"]
   },
-  
-  // Carbon Credits
   'carbon credits': {
     response: "Carbon credits are tradable certificates representing one metric ton of CO2 emissions reduced or removed from the atmosphere. At Green Lead Nigeria, we develop, verify, and trade high-quality carbon credits from projects like reforestation, clean energy, and mangrove restoration.",
     suggestions: ["How are credits verified?", "What projects do you have?", "How do I buy credits?"]
@@ -42,8 +39,6 @@ const knowledgeBase: Record<string, { response: string, suggestions?: string[] }
     response: "We work with internationally recognized verification bodies like Verra, Gold Standard, and Global Carbon Council. All our projects undergo rigorous third-party auditing to ensure real, measurable, and permanent carbon reductions.",
     suggestions: ["What standards do you use?", "How long does verification take?", "Tell me about auditing"]
   },
-  
-  // Services
   'services': {
     response: "We offer comprehensive carbon solutions including Carbon Crediting & Financing, Carbon Project Auditing, Forest Conservation & Afforestation, Biodiversity Improvement, and General Contract Services.",
     suggestions: ["Tell me about carbon crediting", "More about auditing", "Forest conservation projects"]
@@ -60,8 +55,6 @@ const knowledgeBase: Record<string, { response: string, suggestions?: string[] }
     response: "Our forest conservation projects protect and restore Nigeria's vital ecosystems. We develop afforestation and reforestation projects that generate carbon credits while preserving biodiversity and supporting local communities.",
     suggestions: ["Where are your projects?", "How many trees planted?", "Community benefits"]
   },
-  
-  // Projects
   'projects': {
     response: "We have several active projects across Nigeria: Niger Delta Mangrove Restoration, Katsina Reforestation Initiative, Solar Rural Electrification, and Ogun State Forest Reserve.",
     suggestions: ["Tell me about mangrove project", "Impact metrics", "How to get involved"]
@@ -74,8 +67,6 @@ const knowledgeBase: Record<string, { response: string, suggestions?: string[] }
     response: "Our total impact to date includes over 58,000 tons of CO2 offset, more than 250,000 trees planted, 31 communities impacted, and over 7,500 hectares restored. Every project creates measurable environmental and social benefits.",
     suggestions: ["How do you measure impact?", "Can I see reports?", "Latest achievements"]
   },
-  
-  // Partnerships
   'partnership': {
     response: "We welcome partnerships with corporations, NGOs, government agencies, and investors. Partnership opportunities include project development, technical expertise, research collaboration, community engagement, and corporate sustainability programs.",
     suggestions: ["How to become a partner", "Current partners", "Benefits of partnering"]
@@ -84,8 +75,6 @@ const knowledgeBase: Record<string, { response: string, suggestions?: string[] }
     response: "To become a partner, please fill out our contact form or email partnerships@greenleadnigeria.com. Our team will reach out within 48 hours to discuss collaboration opportunities tailored to your goals.",
     suggestions: ["Tell me about current partners", "What's the process?", "Send me a contact form"]
   },
-  
-  // Contact
   'contact': {
     response: "You can reach us at info@greenleadnigeria.com or call +234 (0) 123 456 7890. Our office is located in Victoria Island, Lagos, Nigeria. Office hours are Monday through Friday, 9am to 6pm.",
     suggestions: ["Schedule a consultation", "Send an email", "Visit our office"]
@@ -94,14 +83,10 @@ const knowledgeBase: Record<string, { response: string, suggestions?: string[] }
     response: "To schedule a free consultation, please fill out our contact form or call us directly. Our carbon experts will discuss your needs and help you find the right solution.",
     suggestions: ["Contact form", "Call now", "Learn about services"]
   },
-  
-  // Pricing
   'pricing': {
     response: "Pricing varies based on project type, scale, and specific requirements. We offer competitive rates and flexible packages. Contact us for a customized quote tailored to your needs.",
     suggestions: ["Get a quote", "What factors affect price?", "Payment options"]
   },
-  
-  // Help
   'help': {
     response: "I can help you with carbon credits, our services, active projects, partnerships, contact information, and impact metrics. What would you like to know?",
     suggestions: ["Tell me about carbon credits", "List services", "Show me projects"]
@@ -281,8 +266,8 @@ export default function Chatbot() {
             className={`fixed z-50 bg-white shadow-2xl rounded-2xl transition-all duration-300 ${
               isMinimized ? 'w-72 sm:w-80' : 'w-[calc(100vw-2rem)] sm:w-[480px]'
             } max-w-full ${
-              // Different positioning for mobile vs desktop
-              'bottom-16 right-4 sm:top-1/2 sm:right-6 sm:-translate-y-1/2'
+              // Mobile: bottom, Desktop: bottom-24 (above the button)
+              'bottom-16 right-4 sm:bottom-24 sm:right-6'
             }`}
           >
             {/* Header */}

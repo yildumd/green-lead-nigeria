@@ -142,7 +142,6 @@ export default function Chatbot() {
   const getPersonalizedResponse = (userInput: string): { response: string, suggestions?: string[] } => {
     const input = userInput.toLowerCase().trim()
     
-    // Check for exact matches
     for (const [key, value] of Object.entries(knowledgeBase)) {
       if (input === key || input.includes(key)) {
         const response = userInfo.name 
@@ -152,7 +151,6 @@ export default function Chatbot() {
       }
     }
     
-    // Check for keywords
     if (input.includes('credit') || input.includes('carbon')) {
       const response = userInfo.name 
         ? knowledgeBase['carbon credits'].response.replace('Hello!', `Hello ${userInfo.name}!`)
@@ -202,7 +200,6 @@ export default function Chatbot() {
       return { response, suggestions: knowledgeBase['impact'].suggestions }
     }
     
-    // Default response
     return {
       response: userInfo.name 
         ? `Thank you for your question ${userInfo.name}. For specific inquiries, please contact our team at info@greenleadnigeria.com or schedule a consultation. Would you like to know about our services or carbon credits?`
@@ -225,7 +222,6 @@ export default function Chatbot() {
     setInputText('')
     setIsTyping(true)
     
-    // Handle name collection
     if (awaitingName && !userInfo.name) {
       setTimeout(() => {
         const name = currentInput.trim()
@@ -243,7 +239,6 @@ export default function Chatbot() {
       return
     }
     
-    // Regular response
     setTimeout(() => {
       const { response, suggestions } = getPersonalizedResponse(currentInput)
       const botMessage: Message = {
@@ -283,9 +278,12 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
             transition={{ type: 'spring', damping: 25 }}
-            className={`fixed bottom-16 right-4 sm:bottom-24 sm:right-6 z-50 bg-white shadow-2xl rounded-2xl transition-all duration-300 ${
+            className={`fixed z-50 bg-white shadow-2xl rounded-2xl transition-all duration-300 ${
               isMinimized ? 'w-72 sm:w-80' : 'w-[calc(100vw-2rem)] sm:w-[480px]'
-            } max-w-full`}
+            } max-w-full ${
+              // Different positioning for mobile vs desktop
+              'bottom-16 right-4 sm:top-1/2 sm:right-6 sm:-translate-y-1/2'
+            }`}
           >
             {/* Header */}
             <div className="flex items-center justify-between rounded-t-2xl bg-primary p-3 sm:p-4">

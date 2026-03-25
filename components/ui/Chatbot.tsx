@@ -120,7 +120,9 @@ export default function Chatbot() {
 
   useEffect(() => {
     if (isOpen && !isMinimized) {
-      inputRef.current?.focus()
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 100)
     }
   }, [isOpen, isMinimized])
 
@@ -242,6 +244,10 @@ export default function Chatbot() {
     setTimeout(() => handleSend(), 100)
   }
 
+  const toggleMinimize = () => {
+    setIsMinimized(!isMinimized)
+  }
+
   return (
     <>
       {/* Chat Button */}
@@ -263,15 +269,19 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.9 }}
             transition={{ type: 'spring', damping: 25 }}
-            className="fixed z-50 bg-white shadow-2xl rounded-2xl overflow-hidden w-[90vw] sm:w-[450px] max-w-[450px]"
+            className="fixed z-50 bg-white shadow-2xl rounded-2xl overflow-hidden"
             style={{
               bottom: '80px',
               right: '16px',
+              width: 'min(90vw, 450px)',
+              maxWidth: '450px',
               maxHeight: '80vh',
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between bg-primary p-3 sm:p-4">
+            {/* Header - Always visible */}
+            <div className="flex items-center justify-between bg-primary p-3 sm:p-4 rounded-t-2xl flex-shrink-0">
               <div>
                 <h3 className="font-semibold text-white text-sm sm:text-base">
                   Green Lead AI Assistant
@@ -281,24 +291,27 @@ export default function Chatbot() {
               </div>
               <div className="flex gap-2">
                 <button
-                  onClick={() => setIsMinimized(!isMinimized)}
+                  onClick={toggleMinimize}
                   className="text-white hover:text-gray-200 transition-colors"
+                  aria-label={isMinimized ? "Expand" : "Minimize"}
                 >
                   {isMinimized ? <Maximize2 size={18} /> : <Minimize2 size={18} />}
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-white hover:text-gray-200 transition-colors"
+                  aria-label="Close"
                 >
                   <X size={18} />
                 </button>
               </div>
             </div>
 
+            {/* Content - Only show when not minimized */}
             {!isMinimized && (
               <>
                 {/* Messages */}
-                <div className="h-[60vh] sm:h-[500px] overflow-y-auto p-3 sm:p-4 bg-gray-50">
+                <div className="overflow-y-auto p-3 sm:p-4 bg-gray-50" style={{ height: 'min(60vh, 500px)' }}>
                   {messages.map((msg, idx) => (
                     <div key={idx} className={`mb-4 flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[85%] ${msg.isUser ? 'text-right' : 'text-left'}`}>
@@ -345,7 +358,7 @@ export default function Chatbot() {
                 </div>
 
                 {/* Input */}
-                <div className="border-t p-3 sm:p-4 bg-white">
+                <div className="border-t p-3 sm:p-4 bg-white flex-shrink-0">
                   <div className="flex gap-2">
                     <input
                       ref={inputRef}
